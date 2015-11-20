@@ -4,10 +4,6 @@
   "description": "time zone utility",
   "author": "Sumit Arora <singhsays@gmail.com>",
   "license": "MIT",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [
     "timezone"
   ],

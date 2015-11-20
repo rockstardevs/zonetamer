@@ -1,7 +1,6 @@
 {
   "name": "zonetamer",
   "description": "time zone utility",
-  "main": "app.js",
   "authors": [
     "Sumit Arora <singhsays@gmail.com>"
   ],
