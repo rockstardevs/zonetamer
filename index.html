@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+  <head>
+    <title>ZoneTamer</title>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300' rel='stylesheet' type='text/css'>
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html">
+    <link rel="import" href="bower_components/iron-icons/iron-icons.html">
+    <link rel="import" href="bower_components/iron-icon/iron-icon.html">
+    <link rel="import" href="bower_components/iron-icons/maps-icons.html">
+    <link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
+    <link rel="import" href="bower_components/iron-localstorage/iron-localstorage.html">
+    <link rel="import" href="bower_components/paper-styles/paper-styles.html">
+    <link rel="import" href="bower_components/paper-header-panel/paper-header-panel.html">
+    <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
+    <link rel="import" href="bower_components/paper-card/paper-card.html">
+    <link rel="import" href="bower_components/paper-button/paper-button.html">
+    <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+    <link rel="import" href="bower_components/paper-item/paper-item.html">
+    <link rel="import" href="bower_components/paper-input/paper-input.html">
+    <link rel="import" href="bower_components/paper-material/paper-material.html">
+    <link rel="import" href="bower_components/google-apis/google-maps-api.html">
+
+    <link rel="import" href="bower_components/polymer/polymer.html">
+    <link rel="import" href="components/time-table/time-table.html">
+    <link rel="import" href="app-theme.html">
+    <link rel="import" href="style.html">
+    <link rel="stylesheet" type="text/css" href="app.css">
+  </head>
+  <body unresolved class="fullbleed vertical layout">
+    <google-maps-api api-key="AIzaSyBLUV07Tw-tWxbRI-3ipjHXF5_dsZKDY14"></google-maps-api>
+    <template is="dom-bind" id="app">
+    <iron-localstorage name="savedPlaces" value="{{places}}" on-iron-localstorage-load-empty="initializePlaces"></iron-localstorage>
+    <iron-ajax url="https://maps.googleapis.com/maps/api/timezone/json" id="searchAjax"
+               handle-as="json" on-response="resolveTimeZone" debounce-duration="300"></iron-ajax>
+    <paper-header-panel mode="waterfall">
+      <paper-toolbar>
+        <div class="title">ZoneTamer</div>
+        <paper-input id="citySearch" placeholder="Add another city"></paper-input>
+      </paper-toolbar>
+      <div class="content vertical center layout">
+        <paper-material class="vertical start-center layout" elevation="1">
+          <template is="dom-repeat" items="{{places}}">
+            <time-table place="{{item}}" highlighted-index="{{highlightedIndex}}" on-remove="removePlace"></time-table>
+          </template>
+        </paper-material>
+      </div>
+    </paper-header-panel>
+    </template>
+    <script src="bower_components/moment/min/moment.min.js"></script>
+    <script src="bower_components/frozen-moment/frozen-moment.js"></script>
+    <script src="bower_components/lodash/lodash.min.js"></script>
+    <script src="bower_components/moment-timezone/builds/moment-timezone-with-data.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

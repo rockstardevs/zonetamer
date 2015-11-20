@@ -1,0 +1,37 @@
+{
+  "name": "zonetamer",
+  "description": "time zone utility",
+  "main": "app.js",
+  "authors": [
+    "Sumit Arora <singhsays@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "timezone"
+  ],
+  "homepage": "https://github.com/rockstardevs/zonetamer",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "frozen-moment": "~0.2.0",
+    "google-apis": "GoogleWebComponents/google-apis#~1.1.2",
+    "iron-elements": "PolymerElements/iron-elements#~1.0.4",
+    "lodash": "~3.10.1",
+    "moment-timezone": "~0.4.1",
+    "paper-badge": "PolymerElements/paper-badge#^1.0.0",
+    "paper-card": "PolymerElements/paper-card#^1.0.0",
+    "paper-checkbox": "PolymerElements/paper-checkbox#^1.0.0",
+    "paper-dialog-scrollable": "PolymerElements/paper-dialog-scrollable#^1.0.0",
+    "paper-dialog-behavior": "PolymerElements/paper-dialog-behavior#^1.0.0",
+    "paper-drawer-panel": "PolymerElements/paper-drawer-panel#^1.0.0",
+    "paper-dialog": "PolymerElements/paper-dialog#^1.0.0",
+    "paper-elements": "PolymerElements/paper-elements#~1.0.5"
+  }
+}

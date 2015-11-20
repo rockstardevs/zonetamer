@@ -1,0 +1,18 @@
+{
+  "name": "zonetamer",
+  "version": "1.0.0",
+  "description": "time zone utility",
+  "author": "Sumit Arora <singhsays@gmail.com>",
+  "license": "MIT",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "timezone"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "github:rockstardevs/zonetamer"
+  }
+}

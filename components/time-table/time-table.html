@@ -1,0 +1,122 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="time-table">
+  <style>
+    paper-item {
+      --paper-item: {
+        background-color: #00affd;
+        color: #fff;
+        border-bottom: 1px solid #4fc3f7;
+        font-family: 'Roboto Condensed';
+        font-weight: 300;
+        font-size: 26px;
+        padding-right: 0;
+      };
+    }
+    iron-icon {
+      --iron-icon-fill-color: #009ae2;
+    }
+    .city {
+      width: 250px;
+      font-size: 21px;
+    }
+    .time {
+      width: 2.6rem;
+      font-size: 16px;
+      text-align: center;
+      padding: 10px 0;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+    .time .secondaryText {
+      font-size: 12px;
+    }
+    .time.night {
+      background-color: #0F75C5;
+    }
+    .time.selected {
+      background-color: #ff4081;
+    }
+    .time.selected.night {
+      background-color: #BE3B8A;
+    }
+    .time+.time {
+      border-left: 1px solid #4fc3f7;
+    }
+    .tzname {
+      width: 2.6rem;
+      font-size: 14px;
+      font-weight: 400;
+    }
+  </style>
+  <template>
+    <paper-item class="flex">
+      <paper-icon-button icon="cancel" class="delete" on-tap="handleRemove"></paper-icon-button>
+      <div class="city">{{place.city}}, {{place.country}}</div>
+      <div class="tzname" on-tap="selectHour" role="button">({{tzname}})</div>
+      <template is="dom-repeat" items="{{times}}">
+        <div class$="{{isSelected(item, index, highlightedIndex)}}"
+             class="time"
+             on-tap="selectHour"
+             on-mouseover="selectHour"
+             on-mouseout="deselectHour">
+             <span class="primaryText">{{format(item)}}</span>
+             <span class="secondaryText">{{format2(item)}}</span></div>
+      </template>
+    </paper-item>
+  </template>
+  <script>
+    Polymer({
+      is: "time-table",
+      properties: {
+        highlightedIndex: {
+          type: Number,
+          notify: true
+        },
+        place: Object,
+        tzname: String,
+        times: Array,
+        onRemove: Function 
+      },
+      format: function(i){
+        return i.format('ha');
+      },
+      format2: function(i){
+        return i.format('ddd');
+      },
+      isNight: function(i){
+        var hour = i.hour();
+        if (!hour || (hour < 8 || hour > 18)) return true;
+        return false;
+      },
+      isSelected: function(item, index, highlighted) {
+        var classes = ["time"];
+        if (index == highlighted) classes.push("selected");
+        if (this.isNight(item)) classes.push("night");
+        return classes.join(" ");
+      },
+      handleRemove: function(e) {
+        this.fire('remove', {'item': this.place});
+      },
+      selectHour: function(e) {
+        if (this.highlightedIndex == e.model.index)
+          this.highlightedIndex = null;
+        else
+          this.highlightedIndex = e.model.index;
+      },
+      deselectHour: function(e) {
+        this.highlightedIndex = null;
+      },
+      ready: function() {
+        var self = this;
+        self.highlightedIndex = -1;
+        self.cityClock = app.masterclock.clone().tz(self.place.tz);
+        self.tzname = self.cityClock.format('z');
+        self.times = _.range(1,25).map(function(i) {
+          return self.cityClock.add(i, 'h');
+        });
+      }
+    });
+  </script>
+</dom-module>
